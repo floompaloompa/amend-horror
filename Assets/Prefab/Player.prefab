@@ -55,7 +55,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -126,6 +126,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5686a04352018440184f688917f029ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  growingPetriDish: {fileID: 0}
+  dishes_stored: 0
+  cells_stored: 0
+  cells: 0
 --- !u!1 &1675573870550128768
 GameObject:
   m_ObjectHideFlags: 0
