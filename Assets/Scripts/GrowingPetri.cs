@@ -24,9 +24,10 @@ public class GrowingPetri : MonoBehaviour
     void OnMouseDown()
    {
 
+        var state = myAnim.GetFloat("state");
+        
         if(myPlayer.cells_stored > 0) {
-            var state = myAnim.GetFloat("state");
-            
+
             if(state <= 1) { 
                 myPlayer.cells_stored--;
                 myAnim.SetFloat("state", 1.0f); 
@@ -34,11 +35,12 @@ public class GrowingPetri : MonoBehaviour
                 TimerOn = true;
                 
             }
-            if(state > 2 && TimerOn == false) {
-                myPlayer.cells += 10;
+            
+        }
+        if(state > 2) {
+                myPlayer.cells += 20;
                 myAnim.SetFloat("state", 0f); 
             }
-        }
        // Code here is called when the GameObject is clicked on.
    }
 
@@ -56,10 +58,13 @@ public class GrowingPetri : MonoBehaviour
 
             } else {
                 var state = myAnim.GetFloat("state");
-                if(state < 3) {
+                if(state < 2) {
                     myAnim.SetFloat("state", state + 1.0f);
                     TimeLeft = 10;
-                } else {
+                } else if(state <3) {
+                    myAnim.SetFloat("state", state + 1.0f);
+                    TimerOn = false;
+                }else {
                     TimeLeft = 0;
                     TimerOn = false;
 

@@ -8,6 +8,8 @@ public class GameLogic : MonoBehaviour
 
     [SerializeField] public GameObject petriDish;
     [SerializeField] public GameObject vial;
+    [SerializeField] public int nbrOfVials;
+    [SerializeField] public int nbrOfPlates;
 
     public List<Vector3> SpawnPoints; 
     // Start is called before the first frame update
@@ -30,17 +32,17 @@ public class GameLogic : MonoBehaviour
         float width = height * Camera.main.aspect;
         //call the function we created
         //Vector3 point = GetRandomSpawnPoint();
-        for (int index=0; index < 3; index++) {
-            var posX = UnityEngine.Random.Range(-width/2, width/2);
-            var posY = UnityEngine.Random.Range(-height/2, height/2);
+        for (int index=0; index < nbrOfPlates; index++) {
+            var posX = UnityEngine.Random.Range(-width/2, width*6);
+            var posY = UnityEngine.Random.Range(-height*6, height/2);
             Vector3 point = new Vector3(posX, posY, 0);
 
             //hold the spawn point we create as a reference, you can do stuff with this later or not, it really depends.
             GameObject SpawnPointInstance = Instantiate(petriDish, point, Quaternion.identity);
         }
-        for (int index=0; index < 5; index++) {
-        var posX = UnityEngine.Random.Range(-width/2, width/2);
-            var posY = UnityEngine.Random.Range(-height/2, height/2);
+        for (int index=0; index < nbrOfVials; index++) {
+        var posX = UnityEngine.Random.Range(-width/2, width*6);
+            var posY = UnityEngine.Random.Range(-height*6, height/2);
             Vector3 point = new Vector3(posX, posY, 0);
 
             //hold the spawn point we create as a reference, you can do stuff with this later or not, it really depends.

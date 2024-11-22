@@ -7,6 +7,9 @@ public class Player : MonoBehaviour
 
     
     [SerializeField] public GrowingPetri growingPetriDish;
+    [SerializeField] public MousePetri mousePetri;
+
+    public static List<MousePetri> mousePetriList = new List<MousePetri>();
     private float speed = 2.0f;
     public float dishes_stored = 0;
     public float cells_stored = 0;
@@ -20,6 +23,13 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if(dishes_stored < 1) {
+            foreach(MousePetri m in mousePetriList) {
+                Destroy(m.gameObject);
+            }
+            mousePetriList = new List<MousePetri>();
+        }
         if (Input.GetKey(KeyCode.RightArrow)){
 			transform.position += Vector3.right * speed * Time.deltaTime;
         }
@@ -38,20 +48,32 @@ public class Player : MonoBehaviour
         }
         if(Input.GetMouseButtonDown(0)) {
     
-            Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            var posX = mouseWorldPosition.x - (growingPetriDish.GetComponent<SpriteRenderer>().bounds.size.x/2);
-            var posY = mouseWorldPosition.y + (growingPetriDish.GetComponent<SpriteRenderer>().bounds.size.y/2);
+           
             
-            if(dishes_stored >0) {
-                var p = Instantiate(growingPetriDish, new Vector3(posX, posY, 0), Quaternion.identity);
-                p.myPlayer = this;
-                dishes_stored--;
+            var spawnPoint = getMousePos();
+            
+            if(dishes_stored > 0) {
+                if (!Physics2D.OverlapCircle(spawnPoint, growingPetriDish.GetComponent<SpriteRenderer>().bounds.size.x, Physics2D.AllLayers)) {
+
+                    var p = Instantiate(growingPetriDish, spawnPoint, Quaternion.identity);
+                    p.myPlayer = this;
+                    dishes_stored--;
+                }
+
+                
             }
         }
 
        
         
         
+    }
+
+    private Vector2 getMousePos() {
+            Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            var posX = mouseWorldPosition.x; // - (growingPetriDish.GetComponent<SpriteRenderer>().bounds.size.x/2);
+            var posY = mouseWorldPosition.y; // + (growingPetriDish.GetComponent<SpriteRenderer>().bounds.size.y/2);
+            return new Vector3(posX, posY, 0);
     }
 
  
@@ -62,6 +84,11 @@ public class Player : MonoBehaviour
         if(collision.gameObject.tag == "Petridish") {
             dishes_stored++;
             Destroy(collision.gameObject);
+
+            var spawnPoint = getMousePos();
+            var newM = Instantiate(mousePetri, spawnPoint, Quaternion.identity);
+            mousePetriList.Add(newM);
+
         }
         if(collision.gameObject.tag == "Vial") {
             cells_stored++;

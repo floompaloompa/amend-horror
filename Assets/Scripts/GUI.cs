@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class GUI : MonoBehaviour
@@ -14,7 +15,6 @@ public class GUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
         var height = Camera.main.orthographicSize * 2f;
         //Debug.Log(height);
         //Stats.transform.position = new Vector3(0, 1, 0);
@@ -24,6 +24,10 @@ public class GUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if (myPlayer.cells >= 100) {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);}
+            
         Stats.SetText("Petri dishes: " + myPlayer.dishes_stored + 
         ", Cell cultures: " + myPlayer.cells_stored+ 
         ", Cells: " + myPlayer.cells + "/100");
