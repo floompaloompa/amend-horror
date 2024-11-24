@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class Player : MonoBehaviour
     public float dishes_stored = 0;
     public float cells_stored = 0;
     public float cells = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -93,6 +95,12 @@ public class Player : MonoBehaviour
         if(collision.gameObject.tag == "Vial") {
             cells_stored++;
             Destroy(collision.gameObject);
+        }
+        if(collision.gameObject.tag == "Monster") {
+
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        
+
         }
         /*while (collision.gameObject.name == "Name of the object you don't want to collide with" && respawning)
         {

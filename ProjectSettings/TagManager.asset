@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Petridish
   - Vial
+  - Monster
   layers:
   - Default
   - TransparentFX

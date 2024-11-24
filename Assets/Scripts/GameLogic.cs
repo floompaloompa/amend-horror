@@ -23,6 +23,11 @@ public class GameLogic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        /*if (Input.GetKey(KeyCode.Escape)){
+            Application.Quit();
+        }*/
+    
         
     }
 
@@ -48,6 +53,8 @@ public class GameLogic : MonoBehaviour
             //hold the spawn point we create as a reference, you can do stuff with this later or not, it really depends.
             GameObject SpawnPointInstance = Instantiate(vial, point, Quaternion.identity);
         }
+
+        
         
              
     }

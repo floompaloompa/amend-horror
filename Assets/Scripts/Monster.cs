@@ -21,7 +21,7 @@ public class Monster : MonoBehaviour
 
         Dis = Vector2.Distance(transform.position, Target.transform.position);
 
-        transform.position = Vector2.MoveTowards(transform.position, Target.transform.position, Time.deltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, Target.transform.position, Time.deltaTime*speed);
         
 
         
